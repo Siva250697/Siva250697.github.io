@@ -268,9 +268,47 @@ async function seed() {
       isFeatured: true,
       inStock: true,
     },
+    {
+      name: "Eko Tejas Shero Neo",
+      slug: "eko-tejas-shero-neo",
+      categoryId: ekoTejas.id,
+      price: "68000.00",
+      rangeKm: 90,
+      topSpeedKph: 60,
+      motorWatts: 1500,
+      batteryCapacityWh: 2520,
+      weightKg: "88.0",
+      shortDescription: "Stylish 80–90 km+ scooter — available in teal, white, grey, blue & pink.",
+      description:
+        "The Eko Tejas Shero Neo is the stylish all-rounder from Eko Tejas — designed to turn heads with its smooth curves and bold star graphics. Available in five stunning colour options: teal, white, grey, blue, and pink. Choose from Graphene variants (60V 32Ah: 55–60 km, 72V 32Ah: 70–75 km — 1 year warranty) or premium Lithium variants (60V 32Ah: 70–75 km, 60V 36Ah: 75–80 km, 60V 42Ah: 80–90 km+ — 3 year 2+1 warranty). Features front disc brake, LED headlamp, digital display, telescopic suspension, and reverse mode.",
+      imageUrl: "/images/models/shero-neo-teal.jpg",
+      galleryUrls: [
+        "/images/models/shero-neo-white.jpg",
+        "/images/models/shero-neo-lineup.jpg",
+        "/images/models/shero-neo-grey.jpg",
+        "/images/models/shero-neo-pink.jpg",
+        "/images/models/shero-neo-teal-front.jpg",
+        "/images/models/shero-neo-pink-front.jpg",
+      ],
+      features: [
+        "LED Headlamp",
+        "Digital Display",
+        "Front Disc Brake",
+        "Telescopic Suspension",
+        "Reverse Mode",
+        "Star Body Graphics",
+        "Available in 5 Colours",
+        "Graphene Battery — up to 70–75 km",
+        "Lithium Battery — up to 80–90 km+",
+        "1 Year Warranty (Graphene)",
+        "3 Year Warranty 2+1 (Lithium)",
+      ],
+      isFeatured: true,
+      inStock: true,
+    },
   ]);
 
-  console.log("All 7 Siva Motors models seeded successfully!");
+  console.log("All 8 Siva Motors models seeded successfully!");
   process.exit(0);
 }
 
