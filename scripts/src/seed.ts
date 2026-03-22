@@ -349,9 +349,47 @@ async function seed() {
       isFeatured: true,
       inStock: true,
     },
+    {
+      name: "Eko Tejas Astra",
+      slug: "eko-tejas-astra",
+      categoryId: ekoTejas.id,
+      price: "95000.00",
+      rangeKm: 90,
+      topSpeedKph: 70,
+      motorWatts: 2000,
+      batteryCapacityWh: 3024,
+      weightKg: "110.0",
+      shortDescription: "Bold adventure-styled electric scooter — up to 90–100 km+ range in Silver, Orange-Black, Navy & Green.",
+      description:
+        "The Eko Tejas Astra is built for riders who demand a bold, aggressive presence on the road. Its angular geometric body panels, triple LED headlamp array, and honeycomb 'ASTRA' graphics make it instantly recognisable. Available in four stunning colours: Silver, Orange-Black, Navy Blue, and Forest Green. Choose from Graphene variants (60V 32Ah: 55–65 km, 72V 32Ah: 65–70 km — 1 year warranty) or Lithium variants (60V 32Ah: 75–85 km, 60V 36Ah: 85–90 km, 60V 42Ah: 90–100 km+ — 3 year 2+1 warranty). Packed with premium features: front disc brake, golden fork, digital display, and dual rear suspension.",
+      imageUrl: "/images/models/astra-silver.jpg",
+      galleryUrls: [
+        "/images/models/astra-orange-black-side.jpg",
+        "/images/models/astra-navy-front3.jpg",
+        "/images/models/astra-green-side.jpg",
+        "/images/models/astra-slate-side.jpg",
+        "/images/models/astra-silver-rear.jpg",
+      ],
+      features: [
+        "Triple LED Headlamp Array",
+        "Geometric Angular Body Design",
+        "Golden Front Fork",
+        "Front Disc Brake",
+        "Digital Display",
+        "Dual Rear Suspension",
+        "Honeycomb ASTRA Graphics",
+        "4 Colour Options: Silver / Orange-Black / Navy / Green",
+        "Graphene Battery — up to 65–70 km",
+        "Lithium Battery — up to 90–100 km+",
+        "1 Year Warranty (Graphene)",
+        "3 Year Warranty 2+1 (Lithium)",
+      ],
+      isFeatured: true,
+      inStock: true,
+    },
   ]);
 
-  console.log("All 8 Siva Motors models seeded successfully!");
+  console.log("All 10 Siva Motors models seeded successfully!");
   process.exit(0);
 }
 
