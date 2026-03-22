@@ -3,13 +3,19 @@ info:
   # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: EV Showroom API specification
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: categories
+    description: Bike category operations
+  - name: bikes
+    description: E-bike operations
+  - name: inquiries
+    description: Contact and test ride inquiries
 paths:
   /healthz:
     get:
@@ -24,6 +30,116 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /categories:
+    get:
+      operationId: listCategories
+      tags: [categories]
+      summary: List bike categories
+      description: Returns all e-bike categories
+      responses:
+        "200":
+          description: List of categories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Category"
+
+  /bikes:
+    get:
+      operationId: listBikes
+      tags: [bikes]
+      summary: List e-bikes
+      description: Returns all e-bikes with optional filtering
+      parameters:
+        - name: categoryId
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Filter by category ID
+        - name: minPrice
+          in: query
+          required: false
+          schema:
+            type: number
+          description: Minimum price filter
+        - name: maxPrice
+          in: query
+          required: false
+          schema:
+            type: number
+          description: Maximum price filter
+        - name: featured
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: Filter to featured bikes only
+      responses:
+        "200":
+          description: List of e-bikes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Bike"
+
+  /bikes/{id}:
+    get:
+      operationId: getBike
+      tags: [bikes]
+      summary: Get a single e-bike
+      description: Returns a single e-bike by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: E-bike details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Bike"
+        "404":
+          description: Bike not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /inquiries:
+    post:
+      operationId: createInquiry
+      tags: [inquiries]
+      summary: Submit a contact or test ride inquiry
+      description: Saves a customer inquiry to the database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateInquiryRequest"
+      responses:
+        "201":
+          description: Inquiry created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Inquiry"
+        "400":
+          description: Invalid request body
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +150,163 @@ components:
       required:
         - status
 
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        slug:
+          type: string
+        description:
+          type: string
+        imageUrl:
+          type: string
+          nullable: true
+      required:
+        - id
+        - name
+        - slug
+        - description
+
+    Bike:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        slug:
+          type: string
+        categoryId:
+          type: integer
+        category:
+          $ref: "#/components/schemas/Category"
+        price:
+          type: number
+          description: Price in USD
+        rangeKm:
+          type: integer
+          description: Range in kilometers per charge
+        topSpeedKph:
+          type: integer
+          description: Top speed in km/h
+        motorWatts:
+          type: integer
+          description: Motor power in watts
+        batteryCapacityWh:
+          type: integer
+          description: Battery capacity in watt-hours
+        weightKg:
+          type: number
+          description: Weight in kilograms
+        description:
+          type: string
+        shortDescription:
+          type: string
+        imageUrl:
+          type: string
+          nullable: true
+        galleryUrls:
+          type: array
+          items:
+            type: string
+        features:
+          type: array
+          items:
+            type: string
+        isFeatured:
+          type: boolean
+        inStock:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - slug
+        - categoryId
+        - category
+        - price
+        - rangeKm
+        - topSpeedKph
+        - motorWatts
+        - batteryCapacityWh
+        - weightKg
+        - description
+        - shortDescription
+        - features
+        - isFeatured
+        - inStock
+        - createdAt
+
+    Inquiry:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+          nullable: true
+        bikeId:
+          type: integer
+          nullable: true
+        inquiryType:
+          type: string
+          enum: [test_ride, general, pricing]
+        message:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - email
+        - inquiryType
+        - message
+        - createdAt
+
+    CreateInquiryRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+          nullable: true
+        bikeId:
+          type: integer
+          nullable: true
+        inquiryType:
+          type: string
+          enum: [test_ride, general, pricing]
+        message:
+          type: string
+          minLength: 1
+      required:
+        - name
+        - email
+        - inquiryType
+        - message
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+      required:
+        - error
+        - message

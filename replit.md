@@ -21,7 +21,8 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 ```text
 artifacts-monorepo/
 ├── artifacts/              # Deployable applications
-│   └── api-server/         # Express API server
+│   ├── api-server/         # Express API server
+│   └── ev-showroom/        # React + Vite EV showroom frontend
 ├── lib/                    # Shared libraries
 │   ├── api-spec/           # OpenAPI spec + Orval codegen config
 │   ├── api-client-react/   # Generated React Query hooks
@@ -33,6 +34,27 @@ artifacts-monorepo/
 ├── tsconfig.base.json      # Shared TS options (composite, bundler resolution, es2022)
 ├── tsconfig.json           # Root TS project references
 └── package.json            # Root package with hoisted devDeps
+```
+
+## Application: EV Showroom (VoltRide)
+
+An e-bike showroom website for a fictional brand called **VoltRide**. Features:
+
+- **Home page** (`/`) — Hero banner, featured bikes, categories, selling points
+- **Catalog page** (`/catalog`) — All bikes with category filter + price range filter  
+- **Bike detail page** (`/bikes/:id`) — Full specs, features, description for each model
+- **Contact page** (`/contact`) — Test ride booking / inquiry form (saves to DB)
+
+### Reseed data
+
+```bash
+pnpm --filter @workspace/scripts run seed
+```
+
+### Run codegen (after OpenAPI spec changes)
+
+```bash
+pnpm --filter @workspace/api-spec run codegen
 ```
 
 ## TypeScript & Composite Projects
@@ -50,27 +72,32 @@ Every package extends `tsconfig.base.json` which sets `composite: true`. The roo
 
 ## Packages
 
+### `artifacts/ev-showroom` (`@workspace/ev-showroom`)
+
+React + Vite frontend. Pages: Home, Catalog, Bike Detail, Contact. Uses generated React Query hooks from `@workspace/api-client-react`.
+
 ### `artifacts/api-server` (`@workspace/api-server`)
 
 Express 5 API server. Routes live in `src/routes/` and use `@workspace/api-zod` for request and response validation and `@workspace/db` for persistence.
 
 - Entry: `src/index.ts` — reads `PORT`, starts Express
 - App setup: `src/app.ts` — mounts CORS, JSON/urlencoded parsing, routes at `/api`
-- Routes: `src/routes/index.ts` mounts sub-routers; `src/routes/health.ts` exposes `GET /health` (full path: `/api/health`)
+- Routes:
+  - `GET /api/healthz` — Health check
+  - `GET /api/categories` — List all bike categories
+  - `GET /api/bikes` — List bikes (filters: categoryId, minPrice, maxPrice, featured)
+  - `GET /api/bikes/:id` — Get a single bike
+  - `POST /api/inquiries` — Create a contact/test-ride inquiry
 - Depends on: `@workspace/db`, `@workspace/api-zod`
-- `pnpm --filter @workspace/api-server run dev` — run the dev server
-- `pnpm --filter @workspace/api-server run build` — production esbuild bundle (`dist/index.cjs`)
-- Build bundles an allowlist of deps (express, cors, pg, drizzle-orm, zod, etc.) and externalizes the rest
 
 ### `lib/db` (`@workspace/db`)
 
 Database layer using Drizzle ORM with PostgreSQL. Exports a Drizzle client instance and schema models.
 
-- `src/index.ts` — creates a `Pool` + Drizzle instance, exports schema
-- `src/schema/index.ts` — barrel re-export of all models
-- `src/schema/<modelname>.ts` — table definitions with `drizzle-zod` insert schemas (no models definitions exist right now)
+- `src/schema/categories.ts` — Categories table
+- `src/schema/bikes.ts` — Bikes table (FK to categories)
+- `src/schema/inquiries.ts` — Inquiries table (FK to bikes, optional)
 - `drizzle.config.ts` — Drizzle Kit config (requires `DATABASE_URL`, automatically provided by Replit)
-- Exports: `.` (pool, db, schema), `./schema` (schema only)
 
 Production migrations are handled by Replit when publishing. In development, we just use `pnpm --filter @workspace/db run push`, and we fallback to `pnpm --filter @workspace/db run push-force`.
 
@@ -85,12 +112,14 @@ Run codegen: `pnpm --filter @workspace/api-spec run codegen`
 
 ### `lib/api-zod` (`@workspace/api-zod`)
 
-Generated Zod schemas from the OpenAPI spec (e.g. `HealthCheckResponse`). Used by `api-server` for response validation.
+Generated Zod schemas from the OpenAPI spec. Used by `api-server` for response/request validation.
 
 ### `lib/api-client-react` (`@workspace/api-client-react`)
 
-Generated React Query hooks and fetch client from the OpenAPI spec (e.g. `useHealthCheck`, `healthCheck`).
+Generated React Query hooks and fetch client from the OpenAPI spec.
 
 ### `scripts` (`@workspace/scripts`)
 
-Utility scripts package. Each script is a `.ts` file in `src/` with a corresponding npm script in `package.json`. Run scripts via `pnpm --filter @workspace/scripts run <script>`. Scripts can import any workspace package (e.g., `@workspace/db`) by adding it as a dependency in `scripts/package.json`.
+Utility scripts package. Each script is a `.ts` file in `src/` with a corresponding npm script in `package.json`.
+
+- `seed.ts` — Seeds categories and 8 sample e-bike models into the database

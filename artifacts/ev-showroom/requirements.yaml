@@ -1,0 +1,22 @@
+packages:
+  "framer-motion": "For stunning page transitions, scroll reveals, and micro-interactions"
+  "react-hook-form": "For robust contact and booking form state management"
+  "@hookform/resolvers": "Zod resolver for validating form inputs"
+  "zod": "Schema validation for forms"
+  "clsx": "Utility for constructing className strings conditionally"
+  "tailwind-merge": "Utility for merging tailwind classes without style conflicts"
+
+images:
+  - path: "artifacts/ev-showroom/public/images/hero-bg.png"
+    description: "Dark premium cinematic studio lighting showing a sleek electric bike silhouette with glowing electric green neon accents in a moody environment"
+    aspect_ratio: "16:9"
+  - path: "artifacts/ev-showroom/public/images/pattern-mesh.png"
+    description: "Abstract gradient mesh background in very dark charcoal and black with subtle electric green neon light leaks and subtle noise texture"
+    aspect_ratio: "16:9"
+  - path: "artifacts/ev-showroom/public/images/logo-mark.png"
+    description: "Minimalist geometric futuristic logo mark for an electric vehicle brand, resembling a lightning bolt merged with a wheel, glowing green on transparent background"
+    aspect_ratio: "1:1"
+
+notes:
+  - "Assuming @workspace/api-client-react exports hooks properly configured with React Query v5"
+  - "The API returns placeholder images but we use custom placehold.co URLs to match the requested EV theme perfectly."
