@@ -35,7 +35,7 @@ export function Navbar() {
               <Zap className="w-6 h-6 text-primary" />
             </div>
             <span className="font-display font-bold text-xl tracking-wide">
-              Volt<span className="text-primary">Ride</span>
+              Siva<span className="text-primary">Motors</span>
             </span>
           </Link>
 
