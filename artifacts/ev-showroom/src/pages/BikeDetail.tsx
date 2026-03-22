@@ -58,7 +58,7 @@ export function BikeDetail() {
                 <img 
                   src={imageUrl} 
                   alt={bike.name} 
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                  className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
                 {!bike.inStock && (
                   <div className="absolute inset-0 bg-background/60 backdrop-blur-sm flex items-center justify-center">
@@ -73,8 +73,8 @@ export function BikeDetail() {
               {bike.galleryUrls && bike.galleryUrls.length > 0 && (
                 <div className="grid grid-cols-3 gap-4">
                   {bike.galleryUrls.slice(0, 3).map((url, idx) => (
-                    <div key={idx} className="aspect-square rounded-xl overflow-hidden bg-card border border-white/5">
-                      <img src={url} alt={`${bike.name} gallery ${idx}`} className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
+                    <div key={idx} className="aspect-square rounded-xl overflow-hidden bg-card border border-white/5 flex items-center justify-center">
+                      <img src={url} alt={`${bike.name} gallery ${idx}`} className="w-full h-full object-contain p-2 hover:scale-110 transition-transform duration-500" />
                     </div>
                   ))}
                 </div>

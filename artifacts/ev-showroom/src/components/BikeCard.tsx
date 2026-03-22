@@ -15,11 +15,11 @@ export function BikeCard({ bike }: { bike: Bike }) {
       whileHover={{ y: -8 }}
       className="group relative bg-card rounded-2xl overflow-hidden border border-white/5 hover:border-primary/30 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(57,255,20,0.1)] flex flex-col h-full"
     >
-      <div className="aspect-[4/3] relative overflow-hidden bg-secondary">
+      <div className="aspect-[4/3] relative overflow-hidden bg-secondary flex items-center justify-center">
         <img
           src={imageUrl}
           alt={bike.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+          className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-500 ease-out"
         />
         {bike.isFeatured && (
           <div className="absolute top-4 left-4 bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
