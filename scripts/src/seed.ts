@@ -226,9 +226,47 @@ async function seed() {
       isFeatured: false,
       inStock: true,
     },
+    {
+      name: "Eko Tejas Jatayu",
+      slug: "eko-tejas-jatayu",
+      categoryId: ekotejas.id,
+      price: "82000.00",
+      rangeKm: 120,
+      topSpeedKph: 65,
+      motorWatts: 2000,
+      batteryCapacityWh: 2880,
+      weightKg: "95.0",
+      shortDescription: "Bold 120 km flagship scooter — available in orange, teal, navy blue & rose gold.",
+      description:
+        "The Eko Tejas Jatayu is the flagship electric scooter from Eko Tejas, built for riders who demand both power and presence. With an impressive 120 km range on a single charge and a striking angular design, the Jatayu stands out in any crowd. Available in four stunning colour options: vibrant orange, sky teal, midnight navy blue, and rose gold. Features a 2000W motor, 72V 40Ah battery (8–9 hrs charge), LED X-pattern headlamp, digital instrument cluster, front disc brake, telescopic suspension, reverse mode, and \"JATAYU\" body graphics with the Eko Tejas badge. 1-year warranty on motor, controller, and battery.",
+      imageUrl: "/images/models/jatayu-orange.jpg",
+      galleryUrls: [
+        "/images/models/jatayu-teal.jpg",
+        "/images/models/jatayu-teal-front.jpg",
+        "/images/models/jatayu-blue.jpg",
+        "/images/models/jatayu-blue-front.jpg",
+        "/images/models/jatayu-rosegold.jpg",
+        "/images/models/jatayu-orange-front.jpg",
+      ],
+      features: [
+        "LED X-Pattern Headlamp",
+        "Digital Instrument Cluster",
+        "Front Disc Brake",
+        "Telescopic Suspension",
+        "Reverse Mode",
+        "Bold Angular Design",
+        "Available in 4 Colours",
+        "72V 40Ah Battery — 120 km Range",
+        "2000W Motor",
+        "Eko Tejas Badge Graphics",
+        "1 Year Warranty (Motor, Controller, Battery)",
+      ],
+      isFeatured: true,
+      inStock: true,
+    },
   ]);
 
-  console.log("All 6 Siva Motors models seeded successfully!");
+  console.log("All 7 Siva Motors models seeded successfully!");
   process.exit(0);
 }
 
