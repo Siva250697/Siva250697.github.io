@@ -3,8 +3,10 @@ import { Layout } from "@/components/layout/Layout";
 import { BikeCard } from "@/components/BikeCard";
 import { useListBikes, useListCategories } from "@workspace/api-client-react";
 import { motion } from "framer-motion";
-import { BatteryCharging, Leaf, Zap, ArrowRight, ArrowUpRight, ShieldCheck } from "lucide-react";
+import { BatteryCharging, Leaf, Zap, ArrowRight, ArrowUpRight, ShieldCheck, MessageCircle, Tag } from "lucide-react";
 import { getPlaceholderImage } from "@/lib/utils";
+
+const WA_NUMBER = "916300312415";
 
 export function Home() {
   const { data: featuredBikes, isLoading: isLoadingBikes } = useListBikes({ featured: true });
@@ -60,6 +62,63 @@ export function Home() {
               </div>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* SPECIAL OFFER BANNER */}
+      <section className="py-16 bg-primary/5 border-y border-primary/20 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+          <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="bg-card border border-primary/30 rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 shadow-[0_0_60px_rgba(57,255,20,0.08)]"
+          >
+            {/* Icon Badge */}
+            <div className="shrink-0 w-24 h-24 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+              <Tag className="w-12 h-12 text-primary" />
+            </div>
+
+            {/* Text */}
+            <div className="flex-1 text-center md:text-left">
+              <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold uppercase tracking-widest mb-3">
+                Limited Period Offer
+              </span>
+              <h2 className="text-3xl md:text-4xl font-display font-bold mb-3 leading-tight">
+                3 Electric Scooters<br />
+                <span className="text-primary" style={{ textShadow: "0 0 20px rgba(57,255,20,0.4)" }}>
+                  for just ₹1 Lakh + GST
+                </span>
+              </h2>
+              <p className="text-muted-foreground text-lg max-w-xl">
+                An unbeatable fleet deal for families, businesses, or group buyers. Mix and match from our full range. Contact us on WhatsApp to claim this offer before it expires!
+              </p>
+            </div>
+
+            {/* CTA */}
+            <div className="shrink-0 flex flex-col gap-3 w-full md:w-auto">
+              <a
+                href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi! I'd like to know more about the 3 scooters for ₹1 Lakh offer. Please share the details.")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-4 rounded-xl bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold text-lg flex items-center justify-center gap-2 transition-colors duration-300 whitespace-nowrap"
+              >
+                <MessageCircle className="w-5 h-5" />
+                Claim on WhatsApp
+              </a>
+              <Link
+                href="/contact"
+                className="px-8 py-4 rounded-xl bg-card border border-white/10 text-foreground font-semibold text-base flex items-center justify-center hover:bg-white/5 transition-colors whitespace-nowrap"
+              >
+                Enquire Now
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
 
