@@ -1,11 +1,14 @@
 import { Link } from "wouter";
-import { formatPrice, getPlaceholderImage } from "@/lib/utils";
+import { getPlaceholderImage } from "@/lib/utils";
 import type { Bike } from "@workspace/api-client-react";
-import { ArrowRight, Battery, Gauge, Weight } from "lucide-react";
+import { ArrowRight, Battery, Gauge, Weight, MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
+
+const WA_NUMBER = "916300312415";
 
 export function BikeCard({ bike }: { bike: Bike }) {
   const imageUrl = bike.imageUrl || getPlaceholderImage(bike.name);
+  const waLink = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Hi, I'm interested in the ${bike.name}. Could you please share the price and availability?`)}`;
 
   return (
     <motion.div 
@@ -27,14 +30,12 @@ export function BikeCard({ bike }: { bike: Bike }) {
           {bike.category?.name || "E-Bike"}
         </div>
         
-        {/* Hover Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
 
       <div className="p-6 flex-1 flex flex-col">
-        <div className="flex justify-between items-start gap-4 mb-2">
+        <div className="mb-2">
           <h3 className="font-display font-bold text-xl line-clamp-1">{bike.name}</h3>
-          <span className="text-primary font-bold text-lg shrink-0">{formatPrice(bike.price)}</span>
         </div>
         
         <p className="text-muted-foreground text-sm line-clamp-2 mb-6 flex-1">
@@ -59,13 +60,24 @@ export function BikeCard({ bike }: { bike: Bike }) {
           </div>
         </div>
 
-        <Link 
-          href={`/bikes/${bike.id}`}
-          className="w-full py-3 px-4 rounded-xl bg-secondary hover:bg-primary hover:text-primary-foreground font-semibold flex items-center justify-center gap-2 transition-colors duration-300"
-        >
-          View Details
-          <ArrowRight className="w-4 h-4" />
-        </Link>
+        <div className="flex flex-col gap-3">
+          <Link 
+            href={`/bikes/${bike.id}`}
+            className="w-full py-3 px-4 rounded-xl bg-secondary hover:bg-white/10 font-semibold flex items-center justify-center gap-2 transition-colors duration-300"
+          >
+            View Details
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+          <a
+            href={waLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#1ebe5d] text-white font-semibold flex items-center justify-center gap-2 transition-colors duration-300"
+          >
+            <MessageCircle className="w-4 h-4" />
+            Ask Price on WhatsApp
+          </a>
+        </div>
       </div>
     </motion.div>
   );

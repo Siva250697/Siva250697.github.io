@@ -1,9 +1,11 @@
 import { useParams, Link } from "wouter";
 import { Layout } from "@/components/layout/Layout";
 import { useGetBike } from "@workspace/api-client-react";
-import { formatPrice, getPlaceholderImage } from "@/lib/utils";
-import { Battery, Gauge, Weight, Zap, CheckCircle2, ArrowLeft, Calendar } from "lucide-react";
+import { getPlaceholderImage } from "@/lib/utils";
+import { Battery, Gauge, Weight, Zap, CheckCircle2, ArrowLeft, Calendar, MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
+
+const WA_NUMBER = "916300312415";
 
 export function BikeDetail() {
   const { id } = useParams<{ id: string }>();
@@ -91,7 +93,6 @@ export function BikeDetail() {
                 </span>
               </div>
               <h1 className="text-4xl md:text-5xl font-display font-bold mb-4">{bike.name}</h1>
-              <p className="text-2xl text-muted-foreground font-medium mb-6">{formatPrice(bike.price)}</p>
               
               <p className="text-lg text-foreground/80 leading-relaxed mb-10">
                 {bike.description}
@@ -149,12 +150,15 @@ export function BikeDetail() {
                   <Calendar className="w-5 h-5" />
                   {bike.inStock ? "Book a Test Ride" : "Currently Unavailable"}
                 </Link>
-                <Link 
-                  href={`/contact?bikeId=${bike.id}&type=pricing`}
-                  className="flex-1 py-4 px-8 rounded-xl bg-card border border-white/10 font-bold text-lg flex items-center justify-center hover:bg-white/5 transition-colors"
+                <a
+                  href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Hi, I'd like to know the price of the ${bike.name}. Please share the details.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-4 px-8 rounded-xl bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold text-lg flex items-center justify-center gap-2 transition-colors duration-300"
                 >
-                  Request Quote
-                </Link>
+                  <MessageCircle className="w-5 h-5" />
+                  Get Price on WhatsApp
+                </a>
               </div>
             </motion.div>
           </div>

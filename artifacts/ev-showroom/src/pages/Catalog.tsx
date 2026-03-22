@@ -6,12 +6,10 @@ import type { Bike } from "@workspace/api-client-react";
 import { Filter, SlidersHorizontal, Search, ChevronDown } from "lucide-react";
 import { useSearch } from "wouter";
 
-type SortOption = "name_asc" | "price_asc" | "price_desc" | "range_desc";
+type SortOption = "name_asc" | "range_desc";
 
 const sortLabels: Record<SortOption, string> = {
   name_asc: "Name: A–Z",
-  price_asc: "Price: Low to High",
-  price_desc: "Price: High to Low",
   range_desc: "Range: Highest First",
 };
 
@@ -20,10 +18,6 @@ function sortBikes(bikes: Bike[], sort: SortOption): Bike[] {
     switch (sort) {
       case "name_asc":
         return a.name.localeCompare(b.name);
-      case "price_asc":
-        return Number(a.price) - Number(b.price);
-      case "price_desc":
-        return Number(b.price) - Number(a.price);
       case "range_desc":
         return b.rangeKm - a.rangeKm;
     }
@@ -36,17 +30,10 @@ export function Catalog() {
   const initialCategoryId = searchParams.get("categoryId") ? Number(searchParams.get("categoryId")) : undefined;
 
   const [categoryId, setCategoryId] = useState<number | undefined>(initialCategoryId);
-  const [minPrice, setMinPrice] = useState<number | undefined>();
-  const [maxPrice, setMaxPrice] = useState<number | undefined>();
   const [sortBy, setSortBy] = useState<SortOption>("name_asc");
   const [sortOpen, setSortOpen] = useState(false);
 
-  const { data: bikes, isLoading: isLoadingBikes } = useListBikes({
-    categoryId,
-    minPrice,
-    maxPrice,
-  });
-
+  const { data: bikes, isLoading: isLoadingBikes } = useListBikes({ categoryId });
   const { data: categories } = useListCategories();
 
   const sortedBikes = useMemo(() => {
@@ -77,7 +64,7 @@ export function Catalog() {
               </div>
 
               {/* Brand / Category */}
-              <div className="mb-8">
+              <div>
                 <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">Brand</h3>
                 <div className="space-y-3">
                   <label className="flex items-center gap-3 cursor-pointer group">
@@ -102,33 +89,6 @@ export function Catalog() {
                       <span className="group-hover:text-primary transition-colors">{cat.name}</span>
                     </label>
                   ))}
-                </div>
-              </div>
-
-              {/* Price Range */}
-              <div>
-                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">Price Range (₹)</h3>
-                <div className="space-y-4">
-                  <div>
-                    <label className="text-xs text-muted-foreground mb-1 block">Min Price</label>
-                    <input
-                      type="number"
-                      placeholder="0"
-                      className="w-full bg-secondary border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
-                      value={minPrice ?? ""}
-                      onChange={(e) => setMinPrice(e.target.value ? Number(e.target.value) : undefined)}
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs text-muted-foreground mb-1 block">Max Price</label>
-                    <input
-                      type="number"
-                      placeholder="200000"
-                      className="w-full bg-secondary border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
-                      value={maxPrice ?? ""}
-                      onChange={(e) => setMaxPrice(e.target.value ? Number(e.target.value) : undefined)}
-                    />
-                  </div>
                 </div>
               </div>
             </div>
@@ -192,11 +152,7 @@ export function Catalog() {
                   No scooters match your current filters. Try adjusting your criteria.
                 </p>
                 <button
-                  onClick={() => {
-                    setCategoryId(undefined);
-                    setMinPrice(undefined);
-                    setMaxPrice(undefined);
-                  }}
+                  onClick={() => setCategoryId(undefined)}
                   className="mt-6 px-6 py-2 rounded-lg bg-secondary text-foreground hover:bg-white/10 transition-colors"
                 >
                   Clear Filters
