@@ -42,10 +42,11 @@ async function seed() {
       shortDescription: "Everyday commuter — up to 100 km+ range. Graphene & Lithium battery options.",
       description:
         "The Eko Tejas Axel is the perfect everyday electric commuter. Available in multiple battery variants: Graphene options (48V 32Ah: 45–55 km, 60V 32Ah: 55–60 km, 72V 32Ah: 70–80 km — 1 year warranty) and premium Lithium options (48V 32Ah: 75–85 km, 60V 32Ah: 80–90 km, 60V 36Ah: 90–100 km+ — 3 year 2+1 warranty). Features LED headlamp, digital display, disc brakes, telescopic suspension, and reverse mode. Choose the range that fits your daily ride.",
-      imageUrl: "/images/models/axel-blue.png",
+      imageUrl: "/images/models/spot.jpg",
       galleryUrls: [
-        "/images/models/axel-orange.png",
-        "/images/models/axel-black.png",
+        "/images/models/spot-front.jpg",
+        "/images/models/spot-front2.jpg",
+        "/images/models/spot-side.jpg",
       ],
       features: [
         "LED Headlamp",
@@ -74,10 +75,12 @@ async function seed() {
       shortDescription: "Premium Eko Tejas — up to 100 km+ range. Graphene & Lithium variants available.",
       description:
         "The Eko Tejas Axel Pro delivers premium performance with the same versatile battery range as the Axel. Choose from Graphene variants (48V 32Ah: 45–55 km, 60V 32Ah: 55–60 km, 72V 32Ah: 70–80 km — 1 year warranty) or Lithium variants (48V 32Ah: 75–85 km, 60V 32Ah: 80–90 km, 60V 36Ah: 90–100 km+ — 3 year 2+1 warranty). The Axel Pro adds enhanced styling and upgraded body graphics for riders who want a premium look with long-range capability.",
-      imageUrl: "/images/models/axel-pro-red.png",
+      imageUrl: "/images/models/thunder.jpg",
       galleryUrls: [
-        "/images/models/axel-pro-blue.png",
-        "/images/models/axel-pro-white.png",
+        "/images/models/thunder-front.jpg",
+        "/images/models/thunder-front2.jpg",
+        "/images/models/thunder-rear.jpg",
+        "/images/models/thunder-side.jpg",
       ],
       features: [
         "LED Headlamp",
