@@ -36,14 +36,22 @@ artifacts-monorepo/
 └── package.json            # Root package with hoisted devDeps
 ```
 
-## Application: EV Showroom (VoltRide)
+## Application: EV Showroom (Siva Motors)
 
-An e-bike showroom website for a fictional brand called **VoltRide**. Features:
+A full-stack EV showroom website for **Siva Motors** — a real electric vehicle dealership in Vinukonda, Andhra Pradesh. Showcases electric scooters from **Eko Tejas** and **Venumotors** with INR (₹) pricing, real showroom photos, bike detail pages, and a contact/test-ride booking form.
 
 - **Home page** (`/`) — Hero banner, featured bikes, categories, selling points
-- **Catalog page** (`/catalog`) — All bikes with category filter + price range filter  
-- **Bike detail page** (`/bikes/:id`) — Full specs, features, description for each model
+- **Catalog page** (`/catalog`) — All bikes with brand filter + price range filter
+- **Bike detail page** (`/bikes/:id`) — Full specs, gallery, features, description for each model
 - **Contact page** (`/contact`) — Test ride booking / inquiry form (saves to DB)
+
+### Current Models (11 total)
+
+**Eko Tejas (category_id=4):**
+- Axel (ID=9), Axel Pro (ID=10), Jatayu (ID=15), Shero Neo (ID=16), Priv Mini (ID=17), Astra (ID=18), Max (ID=19)
+
+**Venumotors (category_id=5):**
+- Spot (ID=11), Thunder (ID=12), Icon (ID=13), E-Fly (ID=14)
 
 ### Reseed data
 
@@ -122,4 +130,4 @@ Generated React Query hooks and fetch client from the OpenAPI spec.
 
 Utility scripts package. Each script is a `.ts` file in `src/` with a corresponding npm script in `package.json`.
 
-- `seed.ts` — Seeds categories and 8 sample e-bike models into the database
+- `seed.ts` — Seeds categories and 11 Siva Motors EV scooter models into the database

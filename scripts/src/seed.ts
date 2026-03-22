@@ -387,9 +387,49 @@ async function seed() {
       isFeatured: true,
       inStock: true,
     },
+    {
+      name: "Eko Tejas Max",
+      slug: "eko-tejas-max",
+      categoryId: ekoTejas.id,
+      price: "72000.00",
+      rangeKm: 100,
+      topSpeedKph: 65,
+      motorWatts: 1500,
+      batteryCapacityWh: 2520,
+      weightKg: "95.0",
+      shortDescription: "Sporty V-LED electric scooter — 8 bold colours, up to 90–100 km+ range.",
+      description:
+        "The Eko Tejas Max turns heads with its aggressive V-shaped LED DRL headlamp, chevron body graphics, and arrow-style fender decals. Available in eight vivid colours: Black, Dark Red, Mint Green, Purple, Teal, Sky Blue, Red, and Grey. Choose from Graphene variants (60V 32Ah: 45–55 km, 72V 32Ah: 55–65 km — 1 year warranty) or Lithium variants (60V 32Ah: 75–85 km, 60V 36Ah: 85–95 km, 60V 42Ah: 90–100 km+ — 3 year 2+1 warranty). Features V-LED DRL headlamp, digital display, disc brake, telescopic suspension, and reverse mode.",
+      imageUrl: "/images/models/max-black.jpg",
+      galleryUrls: [
+        "/images/models/max-dark-red.jpg",
+        "/images/models/max-mint-green.jpg",
+        "/images/models/max-purple.jpg",
+        "/images/models/max-teal.jpg",
+        "/images/models/max-sky-blue.jpg",
+        "/images/models/max-red.jpg",
+        "/images/models/max-grey.jpg",
+      ],
+      features: [
+        "V-Shape LED DRL Headlamp",
+        "Chevron Body Graphics",
+        "Arrow Fender Decals",
+        "Digital Display",
+        "Front Disc Brake",
+        "Telescopic Suspension",
+        "Reverse Mode",
+        "8 Colour Options",
+        "Graphene Battery — up to 55–65 km",
+        "Lithium Battery — up to 90–100 km+",
+        "1 Year Warranty (Graphene)",
+        "3 Year Warranty 2+1 (Lithium)",
+      ],
+      isFeatured: true,
+      inStock: true,
+    },
   ]);
 
-  console.log("All 10 Siva Motors models seeded successfully!");
+  console.log("All 11 Siva Motors models seeded successfully!");
   process.exit(0);
 }
 
