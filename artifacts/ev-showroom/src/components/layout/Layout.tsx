@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
+import { FloatingContact } from "@/components/FloatingContact";
 
 export function Layout({ children }: { children: ReactNode }) {
   return (
@@ -17,6 +18,7 @@ export function Layout({ children }: { children: ReactNode }) {
       <Navbar />
       <main className="flex-1 relative z-10">{children}</main>
       <Footer />
+      <FloatingContact />
     </div>
   );
 }
