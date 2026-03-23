@@ -52,7 +52,7 @@ export function Navbar() {
               <span className="font-display font-bold text-2xl tracking-wide">
                 <span
                   className="text-primary"
-                  style={{ textShadow: "0 0 18px rgba(57,255,20,0.55)" }}
+                  style={{ textShadow: "0 0 18px rgba(249,115,22,0.55)" }}
                 >
                   Siva
                 </span>
@@ -79,7 +79,7 @@ export function Navbar() {
             <div className="hidden md:block">
               <Link
                 href="/contact"
-                className="px-6 py-2.5 rounded-full font-medium bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(57,255,20,0.4)] transition-all duration-300"
+                className="px-6 py-2.5 rounded-full font-medium bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] transition-all duration-300"
               >
                 Book Test Ride
               </Link>

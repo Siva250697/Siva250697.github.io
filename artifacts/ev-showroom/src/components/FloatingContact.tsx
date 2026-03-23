@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Phone, MapPin, X, MessageCircle, Calendar } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "wouter";
 
 const WA_NUMBER = "916300312415";
 const PHONE = "+91 63003 12415";
@@ -13,20 +12,22 @@ export function FloatingContact() {
   return (
     <div className="fixed bottom-6 right-5 z-50 flex flex-col items-end gap-3">
 
-      {/* Book Now Button */}
-      <Link href="/contact?type=test_ride">
+      <a
+        href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi! I'd like to book a free test ride at Siva Motors, Vinukonda. Please share available slots.")}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <motion.div
           initial={{ scale: 1 }}
           animate={{ scale: [1, 1.04, 1] }}
           transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
-          className="flex items-center gap-2 px-5 py-3 rounded-full bg-primary text-black font-bold text-sm shadow-[0_0_24px_rgba(57,255,20,0.55)] hover:shadow-[0_0_36px_rgba(57,255,20,0.75)] hover:scale-105 transition-all duration-300 whitespace-nowrap cursor-pointer select-none"
+          className="flex items-center gap-2 px-5 py-3 rounded-full bg-primary text-white font-bold text-sm shadow-[0_4px_24px_rgba(249,115,22,0.5)] hover:brightness-110 hover:scale-105 transition-all duration-300 whitespace-nowrap cursor-pointer select-none"
         >
           <Calendar className="w-4 h-4" />
-          Book Now @ ₹499
+          Book Test Ride
         </motion.div>
-      </Link>
+      </a>
 
-      {/* WhatsApp Popup Card */}
       <AnimatePresence>
         {popupOpen && (
           <motion.div
@@ -36,14 +37,10 @@ export function FloatingContact() {
             transition={{ type: "spring", stiffness: 300, damping: 24 }}
             className="bg-card border border-white/10 rounded-2xl p-6 shadow-2xl w-80 mb-1"
           >
-            {/* Header */}
             <div className="flex items-start justify-between mb-5">
               <div>
                 <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">Get in Touch</p>
-                <h3
-                  className="font-display font-bold text-2xl text-primary"
-                  style={{ textShadow: "0 0 16px rgba(57,255,20,0.5)" }}
-                >
+                <h3 className="font-display font-bold text-2xl text-primary">
                   Siva Motors
                 </h3>
               </div>
@@ -55,7 +52,6 @@ export function FloatingContact() {
               </button>
             </div>
 
-            {/* Contact Details */}
             <div className="space-y-4 mb-5">
               <a href={`tel:${PHONE}`} className="flex items-center gap-3 group">
                 <div className="w-11 h-11 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
@@ -80,7 +76,6 @@ export function FloatingContact() {
               </div>
             </div>
 
-            {/* WhatsApp CTA */}
             <a
               href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi! I'd like to know more about electric scooters at Siva Motors.")}`}
               target="_blank"
@@ -94,7 +89,6 @@ export function FloatingContact() {
         )}
       </AnimatePresence>
 
-      {/* WhatsApp FAB */}
       <button
         onClick={() => setPopupOpen((o) => !o)}
         aria-label="Contact on WhatsApp"

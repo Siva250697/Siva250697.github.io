@@ -28,7 +28,7 @@ export function Footer() {
                 <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Call Now</p>
                 <p
                   className="font-display font-bold text-3xl md:text-4xl text-primary group-hover:text-white transition-colors leading-none"
-                  style={{ textShadow: "0 0 20px rgba(57,255,20,0.35)" }}
+                  style={{ textShadow: "0 0 20px rgba(249,115,22,0.35)" }}
                 >
                   +91 63003 12415
                 </p>
@@ -84,7 +84,7 @@ export function Footer() {
                   <Zap className="w-5 h-5 text-primary" />
                 </div>
                 <span className="font-display font-bold text-2xl tracking-wide">
-                  <span className="text-primary" style={{ textShadow: "0 0 14px rgba(57,255,20,0.5)" }}>Siva</span>
+                  <span className="text-primary" style={{ textShadow: "0 0 14px rgba(249,115,22,0.5)" }}>Siva</span>
                   <span className="text-white">Motors</span>
                 </span>
               </Link>
