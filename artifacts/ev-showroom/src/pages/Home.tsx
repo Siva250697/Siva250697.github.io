@@ -14,10 +14,10 @@ const WA_TESTRIDE_LINK = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("
 const WA_ENQUIRY_LINK = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi! I'm interested in buying an electric scooter from Siva Motors. Please help me choose the right model.")}`;
 
 const advantages = [
-  { icon: Fuel, value: "₹0", label: "Petrol Cost", sub: "Charge for just ₹15–25" },
-  { icon: CheckCircle, value: "No DL", label: "Required", sub: "All low-speed models" },
-  { icon: BatteryCharging, value: "140km", label: "Max Range", sub: "On a single charge" },
-  { icon: ShieldCheck, value: "3 Year", label: "Warranty", sub: "On lithium batteries" },
+  { icon: Fuel, value: "₹0", label: "Petrol Cost", sub: "Just ₹15–25 per charge" },
+  { icon: CheckCircle, value: "No DL", label: "Required", sub: "Low-speed models" },
+  { icon: BatteryCharging, value: "50–100km", label: "Range", sub: "Per full charge" },
+  { icon: ShieldCheck, value: "1–3 Yr", label: "Warranty", sub: "Li-ion: 3yr · Graphene: 1yr" },
 ];
 
 export function Home() {
