@@ -368,33 +368,123 @@ export function Home() {
             className="text-center mb-10"
           >
             <span className="text-primary text-sm font-bold uppercase tracking-widest">Authorised Dealer</span>
-            <h2 className="text-4xl font-display font-black mt-1">Two Great Brands</h2>
+            <h2 className="text-4xl font-display font-black mt-1">Trusted Brands We Sell</h2>
+            <p className="text-muted-foreground mt-2">Only genuine, certified electric scooters — no local brands, no compromises.</p>
           </motion.div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {categories?.map((cat, idx) => (
-              <Link key={cat.id} href={`/catalog?categoryId=${cat.id}`}>
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="group relative h-[200px] rounded-3xl overflow-hidden border border-white/8 hover:border-primary/50 transition-all duration-300 cursor-pointer"
-                >
-                  <img
-                    src={cat.imageUrl || `${import.meta.env.BASE_URL}images/hero-bg.png`}
-                    alt={cat.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                  <div className="absolute inset-0 p-7 flex flex-col justify-end">
-                    <h3 className="text-2xl font-display font-black text-white mb-1">{cat.name}</h3>
-                    <div className="flex items-center gap-1 text-primary text-sm font-bold">
-                      Browse models <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+
+            {/* ── EKO TEJAS ── */}
+            <Link href="/catalog?categoryId=4">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="group relative h-[320px] rounded-3xl overflow-hidden border border-white/8 hover:border-primary/50 transition-all duration-300 cursor-pointer"
+              >
+                {/* 3-image collage */}
+                <div className="absolute inset-0 grid grid-cols-3 grid-rows-1">
+                  <div className="col-span-2 overflow-hidden">
+                    <img
+                      src={`${import.meta.env.BASE_URL}images/models/astra-navy-front.jpg`}
+                      alt="Eko Tejas Astra"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                  <div className="col-span-1 grid grid-rows-2 overflow-hidden">
+                    <div className="overflow-hidden border-l border-white/10">
+                      <img
+                        src={`${import.meta.env.BASE_URL}images/models/jatayu-blue.jpg`}
+                        alt="Eko Tejas Jatayu"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 delay-75"
+                      />
+                    </div>
+                    <div className="overflow-hidden border-l border-t border-white/10">
+                      <img
+                        src={`${import.meta.env.BASE_URL}images/models/max-black.jpg`}
+                        alt="Eko Tejas Max"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 delay-150"
+                      />
                     </div>
                   </div>
-                </motion.div>
-              </Link>
-            ))}
+                </div>
+
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
+
+                {/* Content */}
+                <div className="absolute inset-0 p-7 flex flex-col justify-between">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary text-xs font-bold w-fit">
+                    ✓ Authorised Dealer
+                  </span>
+                  <div>
+                    <p className="text-white/60 text-xs font-semibold uppercase tracking-widest mb-1">7 Models Available</p>
+                    <h3 className="text-3xl font-display font-black text-white mb-3">Eko Tejas</h3>
+                    <div className="flex items-center gap-2 text-primary text-sm font-bold group-hover:gap-3 transition-all">
+                      Explore Eko Tejas <ArrowRight className="w-4 h-4" />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </Link>
+
+            {/* ── VENUMOTORS ── */}
+            <Link href="/catalog?categoryId=5">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="group relative h-[320px] rounded-3xl overflow-hidden border border-white/8 hover:border-primary/50 transition-all duration-300 cursor-pointer"
+              >
+                {/* 3-image collage */}
+                <div className="absolute inset-0 grid grid-cols-3 grid-rows-1">
+                  <div className="col-span-2 overflow-hidden">
+                    <img
+                      src={`${import.meta.env.BASE_URL}images/models/efly-new.jpg`}
+                      alt="Venumotors E-Fly"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                  <div className="col-span-1 grid grid-rows-2 overflow-hidden">
+                    <div className="overflow-hidden border-l border-white/10">
+                      <img
+                        src={`${import.meta.env.BASE_URL}images/models/icon-new.jpg`}
+                        alt="Venumotors Icon"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 delay-75"
+                      />
+                    </div>
+                    <div className="overflow-hidden border-l border-t border-white/10">
+                      <img
+                        src={`${import.meta.env.BASE_URL}images/models/thunder-new.jpg`}
+                        alt="Venumotors Thunder"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 delay-150"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
+
+                {/* Content */}
+                <div className="absolute inset-0 p-7 flex flex-col justify-between">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary text-xs font-bold w-fit">
+                    ✓ Authorised Dealer
+                  </span>
+                  <div>
+                    <p className="text-white/60 text-xs font-semibold uppercase tracking-widest mb-1">4 Models Available</p>
+                    <h3 className="text-3xl font-display font-black text-white mb-3">Venumotors</h3>
+                    <div className="flex items-center gap-2 text-primary text-sm font-bold group-hover:gap-3 transition-all">
+                      Explore Venumotors <ArrowRight className="w-4 h-4" />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </Link>
+
           </div>
         </div>
       </section>
