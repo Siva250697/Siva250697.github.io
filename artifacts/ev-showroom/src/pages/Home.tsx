@@ -5,8 +5,66 @@ import { useListBikes, useListCategories } from "@workspace/api-client-react";
 import { motion } from "framer-motion";
 import {
   BatteryCharging, Zap, ArrowRight, ShieldCheck,
-  MessageCircle, MapPin, Phone, Clock, Fuel, CheckCircle, BadgeIndianRupee
+  MessageCircle, MapPin, Phone, Clock, Fuel, CheckCircle, BadgeIndianRupee,
+  Star, Users, Award, ThumbsUp
 } from "lucide-react";
+
+const testimonials = [
+  {
+    name: "Ravi Kumar",
+    location: "Vinukonda",
+    model: "Eko Tejas Axel",
+    rating: 5,
+    text: "Saving around ₹4,500 every month compared to my old petrol bike. Best decision I made. No DL required and zero maintenance tension!",
+    initials: "RK",
+    color: "bg-orange-500",
+  },
+  {
+    name: "Lakshmi Devi",
+    location: "Narasaraopet",
+    model: "Eko Tejas Shero Neo",
+    rating: 5,
+    text: "The Shero Neo is so stylish and smooth. Siva Motors team was very helpful, explained everything clearly. Highly recommend them!",
+    initials: "LD",
+    color: "bg-blue-500",
+  },
+  {
+    name: "Suresh Babu",
+    location: "Palnadu",
+    model: "Venumotors Thunder",
+    rating: 5,
+    text: "Running the Thunder for daily commute. Zero fuel cost, handles well on all roads. Showroom is genuine and trustworthy!",
+    initials: "SB",
+    color: "bg-purple-500",
+  },
+  {
+    name: "Anitha Reddy",
+    location: "Vinukonda",
+    model: "Venumotors Spot",
+    rating: 5,
+    text: "Bought the Spot for my son's college. Very happy with the quality. Great service from Siva Motors. Worth every rupee!",
+    initials: "AR",
+    color: "bg-emerald-500",
+  },
+  {
+    name: "Prasad Rao",
+    location: "Macherla",
+    model: "Eko Tejas Max",
+    rating: 5,
+    text: "Using the Max for delivery work. Charge for ₹10, run all day. In 2 months I recovered the scooter cost from fuel savings alone!",
+    initials: "PR",
+    color: "bg-rose-500",
+  },
+  {
+    name: "Kavitha Nair",
+    location: "Guntur",
+    model: "Eko Tejas Astra",
+    rating: 5,
+    text: "Love the Astra — stylish, powerful, and economical. Siva Motors gave us a great deal and after-sales support is excellent.",
+    initials: "KN",
+    color: "bg-amber-500",
+  },
+];
 
 const WA_NUMBER = "916300312415";
 const WA_OFFER_LINK = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi! I'd like to know more about the 3 scooters for ₹1 Lakh offer. Please share the details.")}`;
@@ -116,6 +174,82 @@ export function Home() {
                 <span className="text-xs text-white/60 mt-0.5">{adv.sub}</span>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── TRUST BAR ─── */}
+      <section className="bg-card/80 border-b border-white/5 py-5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="flex items-center gap-3"
+            >
+              <div className="w-10 h-10 rounded-full bg-primary/15 flex items-center justify-center shrink-0">
+                <Users className="w-5 h-5 text-primary" />
+              </div>
+              <div>
+                <p className="font-display font-black text-2xl text-white leading-none">1000+</p>
+                <p className="text-xs text-muted-foreground font-medium">Happy Customers</p>
+              </div>
+            </motion.div>
+
+            <div className="hidden md:block h-10 w-px bg-white/8" />
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="flex items-center gap-3"
+            >
+              <div className="w-10 h-10 rounded-full bg-primary/15 flex items-center justify-center shrink-0">
+                <Award className="w-5 h-5 text-primary" />
+              </div>
+              <div>
+                <p className="font-display font-black text-2xl text-white leading-none">Only</p>
+                <p className="text-xs text-muted-foreground font-medium">Trusted Brands</p>
+              </div>
+            </motion.div>
+
+            <div className="hidden md:block h-10 w-px bg-white/8" />
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="flex items-center gap-3"
+            >
+              <div className="w-10 h-10 rounded-full bg-primary/15 flex items-center justify-center shrink-0">
+                <ThumbsUp className="w-5 h-5 text-primary" />
+              </div>
+              <div>
+                <p className="font-display font-black text-2xl text-white leading-none">Free</p>
+                <p className="text-xs text-muted-foreground font-medium">Test Ride for Everyone</p>
+              </div>
+            </motion.div>
+
+            <div className="hidden md:block h-10 w-px bg-white/8" />
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="flex items-center gap-3"
+            >
+              <div className="w-10 h-10 rounded-full bg-[#25D366]/15 flex items-center justify-center shrink-0">
+                <MessageCircle className="w-5 h-5 text-[#25D366]" />
+              </div>
+              <div>
+                <p className="font-display font-black text-2xl text-white leading-none">WhatsApp</p>
+                <p className="text-xs text-muted-foreground font-medium">Instant Price & Support</p>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -302,6 +436,64 @@ export function Home() {
                 <div>
                   <h3 className="font-display font-bold text-lg mb-2">{item.title}</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── TESTIMONIALS ─── */}
+      <section className="py-20 bg-card/40 border-y border-white/5 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <span className="text-primary text-sm font-bold uppercase tracking-widest">Customer Reviews</span>
+            <h2 className="text-4xl md:text-5xl font-display font-black mt-1 mb-2">
+              1000+ Happy Riders
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-xl mx-auto">
+              Real customers from Palnadu district sharing their experience.
+            </p>
+            <div className="flex items-center justify-center gap-1 mt-3">
+              {[1,2,3,4,5].map(i => (
+                <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
+              ))}
+              <span className="ml-2 text-sm font-semibold text-muted-foreground">4.9 / 5 average rating</span>
+            </div>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {testimonials.map((t, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className="bg-card border border-white/6 hover:border-primary/25 rounded-3xl p-6 flex flex-col gap-4 transition-all duration-300 hover:-translate-y-1"
+              >
+                <div className="flex gap-1">
+                  {Array.from({ length: t.rating }).map((_, j) => (
+                    <Star key={j} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
+                <p className="text-muted-foreground leading-relaxed flex-1 text-sm">
+                  "{t.text}"
+                </p>
+                <div className="flex items-center gap-3 pt-3 border-t border-white/6">
+                  <div className={`w-10 h-10 rounded-full ${t.color} flex items-center justify-center text-white font-bold text-sm shrink-0`}>
+                    {t.initials}
+                  </div>
+                  <div>
+                    <p className="font-bold text-sm text-white">{t.name}</p>
+                    <p className="text-xs text-primary">{t.model}</p>
+                    <p className="text-xs text-muted-foreground">{t.location}</p>
+                  </div>
                 </div>
               </motion.div>
             ))}
