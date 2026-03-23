@@ -386,23 +386,23 @@ export function Home() {
                 <div className="absolute inset-0 grid grid-cols-3 grid-rows-1">
                   <div className="col-span-2 overflow-hidden">
                     <img
-                      src={`${import.meta.env.BASE_URL}images/models/astra-navy-front.jpg`}
-                      alt="Eko Tejas Astra"
+                      src={`${import.meta.env.BASE_URL}images/models/astra-orange-black-front.jpg`}
+                      alt="Eko Tejas Astra Orange"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                   </div>
                   <div className="col-span-1 grid grid-rows-2 overflow-hidden">
                     <div className="overflow-hidden border-l border-white/10">
                       <img
-                        src={`${import.meta.env.BASE_URL}images/models/jatayu-blue.jpg`}
-                        alt="Eko Tejas Jatayu"
+                        src={`${import.meta.env.BASE_URL}images/models/jatayu-rosegold.jpg`}
+                        alt="Eko Tejas Jatayu Rose Gold"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 delay-75"
                       />
                     </div>
                     <div className="overflow-hidden border-l border-t border-white/10">
                       <img
-                        src={`${import.meta.env.BASE_URL}images/models/max-black.jpg`}
-                        alt="Eko Tejas Max"
+                        src={`${import.meta.env.BASE_URL}images/models/max-red.jpg`}
+                        alt="Eko Tejas Max Red"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 delay-150"
                       />
                     </div>
