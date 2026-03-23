@@ -14,7 +14,7 @@ const WA_TESTRIDE_LINK = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("
 const WA_ENQUIRY_LINK = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi! I'm interested in buying an electric scooter from Siva Motors. Please help me choose the right model.")}`;
 
 const advantages = [
-  { icon: Fuel, value: "₹0", label: "Petrol Cost", sub: "Just ₹15–25 per charge" },
+  { icon: Fuel, value: "₹0", label: "Petrol Cost", sub: "Just ₹8–15 per charge" },
   { icon: CheckCircle, value: "No DL", label: "Required", sub: "Low-speed models" },
   { icon: BatteryCharging, value: "50–100km", label: "Range", sub: "Per full charge" },
   { icon: ShieldCheck, value: "1–3 Yr", label: "Warranty", sub: "Li-ion: 3yr · Graphene: 1yr" },
@@ -277,13 +277,13 @@ export function Home() {
             <span className="text-primary text-sm font-bold uppercase tracking-widest">Why Electric?</span>
             <h2 className="text-4xl md:text-5xl font-display font-black mt-1 mb-3">No Petrol. No Problem.</h2>
             <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-              A typical petrol bike costs ₹4,000–₹6,000/month. Your EV costs ₹15–25 per full charge.
+              A typical petrol bike costs ₹4,000–₹6,000/month. Your EV costs just ₹8–15 per full charge.
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
-              { icon: Fuel, title: "Zero Fuel Cost", desc: "Electricity costs ₹15–25/charge. Save up to ₹6,000 per month." },
+              { icon: Fuel, title: "Zero Fuel Cost", desc: "Electricity costs ₹8–15/charge. Save up to ₹6,000 per month." },
               { icon: CheckCircle, title: "No DL Needed", desc: "Low-speed models — no driving licence or registration required." },
               { icon: Zap, title: "Zero Maintenance", desc: "No oil changes, no spark plugs. Electric motors just work." },
               { icon: ShieldCheck, title: "Warranty Included", desc: "1–3 year warranty on motor, controller and battery." },
