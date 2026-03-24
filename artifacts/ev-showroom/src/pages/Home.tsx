@@ -180,7 +180,7 @@ export function Home() {
               >
                 {/* Slide counter badge */}
                 <div
-                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-bold uppercase tracking-widest mb-5"
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-bold uppercase tracking-widest mb-6"
                   style={{ borderColor: `${slide.accent}55`, backgroundColor: `${slide.accent}18`, color: slide.accent }}
                 >
                   <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: slide.accent }} />
@@ -188,35 +188,12 @@ export function Home() {
                 </div>
 
                 {/* Bike name */}
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-black text-white leading-none mb-3 tracking-tight drop-shadow-xl">
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-black text-white leading-none mb-4 tracking-tight drop-shadow-xl">
                   {slide.name}
                 </h1>
 
                 {/* Tagline */}
-                <p className="text-lg sm:text-xl text-white/70 font-medium mb-4">{slide.tagline}</p>
-
-                {/* Price */}
-                <div className="flex items-baseline gap-2 mb-8">
-                  <span className="text-sm text-white/50 font-semibold uppercase tracking-widest">Starting from</span>
-                  <span className="text-3xl font-display font-black" style={{ color: slide.accent }}>{slide.price}</span>
-                </div>
-
-                {/* CTA buttons */}
-                <div className="flex flex-wrap gap-3">
-                  <Link
-                    href={`/bikes/${slide.slug}`}
-                    className="px-7 py-3.5 rounded-2xl font-bold text-base text-white flex items-center gap-2 transition-all duration-300 hover:scale-105 hover:brightness-110"
-                    style={{ backgroundColor: slide.accent, boxShadow: `0 6px 28px ${slide.accent}55` }}
-                  >
-                    View Details <ArrowRight className="w-4 h-4" />
-                  </Link>
-                  <Link
-                    href="/catalog"
-                    className="px-7 py-3.5 rounded-2xl bg-white/10 border border-white/25 text-white font-bold text-base flex items-center gap-2 hover:bg-white/20 transition-all duration-300"
-                  >
-                    Browse All 11 Models
-                  </Link>
-                </div>
+                <p className="text-lg sm:text-xl text-white/65 font-medium tracking-wide">{slide.tagline}</p>
               </motion.div>
             </AnimatePresence>
           </div>
