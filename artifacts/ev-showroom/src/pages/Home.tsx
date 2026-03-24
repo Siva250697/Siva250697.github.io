@@ -507,10 +507,10 @@ export function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
-              { icon: Fuel, title: "Zero Fuel Cost", desc: "Electricity costs ₹8–15/charge. Save up to ₹6,000 per month." },
-              { icon: CheckCircle, title: "No DL Needed", desc: "Low-speed models — no driving licence or registration required." },
-              { icon: Zap, title: "Zero Maintenance", desc: "No oil changes, no spark plugs. Electric motors just work." },
-              { icon: ShieldCheck, title: "Warranty Included", desc: "1–3 year warranty on motor, controller and battery." },
+              { icon: Fuel, stat: "₹0", title: "Petrol Cost", desc: "Electricity costs ₹8–15/charge. Save up to ₹6,000 per month." },
+              { icon: CheckCircle, stat: "No DL", title: "Required", desc: "Low-speed models — no driving licence or registration required." },
+              { icon: Zap, stat: "0", title: "Maintenance", desc: "No oil changes, no spark plugs. Electric motors just work." },
+              { icon: ShieldCheck, stat: "3 Yr", title: "Warranty", desc: "1–3 year warranty on motor, controller and battery." },
             ].map((item, i) => (
               <motion.div
                 key={i}
@@ -518,14 +518,21 @@ export function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="group bg-card border border-white/5 hover:border-primary/30 rounded-3xl p-7 flex flex-col gap-4 transition-all duration-300 hover:-translate-y-1"
+                className="group relative bg-card border border-white/8 hover:border-primary/50 rounded-3xl overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(249,115,22,0.12)]"
               >
-                <div className="w-12 h-12 rounded-2xl bg-primary/15 border border-primary/30 flex items-center justify-center group-hover:bg-primary/25 transition-colors">
-                  <item.icon className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-display font-bold text-lg mb-2">{item.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
+                {/* Orange top accent bar */}
+                <div className="h-1 w-full bg-gradient-to-r from-primary via-orange-400 to-primary/30" />
+                <div className="p-7 flex flex-col gap-4 flex-1">
+                  <div className="flex items-start justify-between">
+                    <div className="w-12 h-12 rounded-2xl bg-primary/15 border border-primary/30 flex items-center justify-center group-hover:bg-primary/25 transition-colors">
+                      <item.icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <span className="text-2xl font-display font-black text-primary">{item.stat}</span>
+                  </div>
+                  <div>
+                    <h3 className="font-display font-bold text-lg mb-2">{item.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -565,24 +572,44 @@ export function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
-                className="bg-card border border-white/6 hover:border-primary/25 rounded-3xl p-6 flex flex-col gap-4 transition-all duration-300 hover:-translate-y-1"
+                className="group relative bg-card border border-white/8 hover:border-primary/40 rounded-3xl overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_24px_rgba(249,115,22,0.10)]"
               >
-                <div className="flex gap-1">
-                  {Array.from({ length: t.rating }).map((_, j) => (
-                    <Star key={j} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-                <p className="text-muted-foreground leading-relaxed flex-1 text-sm">
-                  "{t.text}"
-                </p>
-                <div className="flex items-center gap-3 pt-3 border-t border-white/6">
-                  <div className={`w-10 h-10 rounded-full ${t.color} flex items-center justify-center text-white font-bold text-sm shrink-0`}>
-                    {t.initials}
+                {/* Colored left accent bar */}
+                <div className={`absolute left-0 top-0 bottom-0 w-1 ${t.color}`} />
+
+                <div className="pl-7 pr-6 pt-6 pb-6 flex flex-col gap-4 flex-1">
+                  {/* Stars + verified badge */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex gap-1">
+                      {Array.from({ length: t.rating }).map((_, j) => (
+                        <Star key={j} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                      ))}
+                    </div>
+                    <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 rounded-full px-2 py-0.5">
+                      <CheckCircle className="w-2.5 h-2.5" /> Verified
+                    </span>
                   </div>
-                  <div>
-                    <p className="font-bold text-sm text-white">{t.name}</p>
-                    <p className="text-xs text-primary">{t.model}</p>
-                    <p className="text-xs text-muted-foreground">{t.location}</p>
+
+                  {/* Large decorative quote + text */}
+                  <div className="relative flex-1">
+                    <span className="absolute -top-2 -left-1 text-5xl font-display font-black text-primary/20 leading-none select-none">"</span>
+                    <p className="text-white/80 leading-relaxed text-sm pl-4 relative z-10">
+                      {t.text}
+                    </p>
+                  </div>
+
+                  {/* Divider */}
+                  <div className="border-t border-white/6 pt-4">
+                    <div className="flex items-center gap-3">
+                      <div className={`w-10 h-10 rounded-full ${t.color} flex items-center justify-center text-white font-bold text-sm shrink-0 ring-2 ring-white/10`}>
+                        {t.initials}
+                      </div>
+                      <div>
+                        <p className="font-bold text-sm text-white">{t.name}</p>
+                        <p className="text-xs text-primary font-semibold">{t.model}</p>
+                        <p className="text-xs text-muted-foreground">{t.location}</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </motion.div>
