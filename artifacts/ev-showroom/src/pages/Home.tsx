@@ -1,13 +1,27 @@
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "wouter";
 import { Layout } from "@/components/layout/Layout";
 import { BikeCard } from "@/components/BikeCard";
 import { useListBikes, useListCategories } from "@workspace/api-client-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   BatteryCharging, Zap, ArrowRight, ShieldCheck,
   MessageCircle, MapPin, Phone, Clock, Fuel, CheckCircle, BadgeIndianRupee,
-  Star, Users, Award, ThumbsUp
+  Star, Users, Award, ThumbsUp, ChevronLeft, ChevronRight
 } from "lucide-react";
+
+const SLIDE_DURATION = 4500;
+
+const slides = [
+  { name: "Eko Tejas Jatayu", tagline: "Bold Flagship · Up to 90 km", price: "₹82,000", img: "images/models/jatayu-orange-front.jpg", slug: "eko-tejas-jatayu", accent: "#f97316" },
+  { name: "Eko Tejas Astra", tagline: "Adventure Styled · 3024W Motor", price: "₹95,000", img: "images/models/astra-front.png", slug: "eko-tejas-astra", accent: "#eab308" },
+  { name: "Eko Tejas Max", tagline: "Sporty V-LED · 8 Colour Options", price: "₹72,000", img: "images/models/max-front.png", slug: "eko-tejas-max", accent: "#22c55e" },
+  { name: "Venumotors Thunder", tagline: "Keyless Entry · Cruise Mode", price: "₹72,000", img: "images/models/thunder-new.jpg", slug: "venumotors-thunder", accent: "#3b82f6" },
+  { name: "Venumotors Icon", tagline: "80–90 km Range · Bold Graphics", price: "₹78,000", img: "images/models/icon-new.jpg", slug: "venumotors-icon", accent: "#ef4444" },
+  { name: "Eko Tejas Shero Neo", tagline: "Women-First Design · 4 Colours", price: "₹68,000", img: "images/models/shero-neo-pink-front.jpg", slug: "eko-tejas-shero-neo", accent: "#ec4899" },
+  { name: "Eko Tejas Axel", tagline: "Everyday Commuter · No DL Required", price: "₹55,000", img: "images/models/axel-front.png", slug: "eko-tejas-axel", accent: "#a855f7" },
+  { name: "Venumotors Spot", tagline: "Bold Angular Styling · 60 km Range", price: "₹52,000", img: "images/models/spot-new.jpg", slug: "venumotors-spot", accent: "#06b6d4" },
+];
 
 const testimonials = [
   {
@@ -82,76 +96,174 @@ export function Home() {
   const { data: featuredBikes, isLoading: isLoadingBikes } = useListBikes({ featured: true });
   const { data: categories } = useListCategories();
 
+  const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  const goNext = useCallback(() => {
+    setCurrent(i => (i + 1) % slides.length);
+    setProgress(0);
+  }, []);
+
+  const goPrev = useCallback(() => {
+    setCurrent(i => (i - 1 + slides.length) % slides.length);
+    setProgress(0);
+  }, []);
+
+  const goTo = useCallback((idx: number) => {
+    setCurrent(idx);
+    setProgress(0);
+  }, []);
+
+  useEffect(() => {
+    if (paused) return;
+    const interval = 50;
+    let elapsed = 0;
+    const timer = setInterval(() => {
+      elapsed += interval;
+      setProgress((elapsed / SLIDE_DURATION) * 100);
+      if (elapsed >= SLIDE_DURATION) {
+        setCurrent(i => (i + 1) % slides.length);
+        elapsed = 0;
+        setProgress(0);
+      }
+    }, interval);
+    return () => clearInterval(timer);
+  }, [current, paused]);
+
+  const slide = slides[current];
+
   return (
     <Layout>
 
-      {/* ─── HERO ─── */}
-      <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img
-            src={`${import.meta.env.BASE_URL}images/hero-bg.png`}
-            alt="Electric Scooter"
-            className="w-full h-full object-cover object-center opacity-50"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/98 via-background/85 to-background/30" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+      {/* ─── HERO SLIDESHOW ─── */}
+      <section
+        className="relative h-screen min-h-[600px] overflow-hidden"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        {/* Background slides */}
+        <AnimatePresence mode="sync">
+          {slides.map((s, i) => i === current && (
+            <motion.div
+              key={s.slug}
+              className="absolute inset-0"
+              initial={{ opacity: 0, scale: 1.06 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.9, ease: "easeInOut" }}
+            >
+              <img
+                src={`${import.meta.env.BASE_URL}${s.img}`}
+                alt={s.name}
+                className="w-full h-full object-cover object-center"
+              />
+            </motion.div>
+          ))}
+        </AnimatePresence>
+
+        {/* Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/55 to-black/25 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/30 to-transparent z-10" />
+
+        {/* Slide content */}
+        <div className="absolute inset-0 z-20 flex items-end pb-28 md:pb-24">
+          <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 w-full">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={current}
+                initial={{ opacity: 0, y: 36 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.55, ease: "easeOut" }}
+                className="max-w-2xl"
+              >
+                {/* Slide counter badge */}
+                <div
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-bold uppercase tracking-widest mb-5"
+                  style={{ borderColor: `${slide.accent}55`, backgroundColor: `${slide.accent}18`, color: slide.accent }}
+                >
+                  <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: slide.accent }} />
+                  {String(current + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
+                </div>
+
+                {/* Bike name */}
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-black text-white leading-none mb-3 tracking-tight drop-shadow-xl">
+                  {slide.name}
+                </h1>
+
+                {/* Tagline */}
+                <p className="text-lg sm:text-xl text-white/70 font-medium mb-4">{slide.tagline}</p>
+
+                {/* Price */}
+                <div className="flex items-baseline gap-2 mb-8">
+                  <span className="text-sm text-white/50 font-semibold uppercase tracking-widest">Starting from</span>
+                  <span className="text-3xl font-display font-black" style={{ color: slide.accent }}>{slide.price}</span>
+                </div>
+
+                {/* CTA buttons */}
+                <div className="flex flex-wrap gap-3">
+                  <Link
+                    href={`/bikes/${slide.slug}`}
+                    className="px-7 py-3.5 rounded-2xl font-bold text-base text-white flex items-center gap-2 transition-all duration-300 hover:scale-105 hover:brightness-110"
+                    style={{ backgroundColor: slide.accent, boxShadow: `0 6px 28px ${slide.accent}55` }}
+                  >
+                    View Details <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  <Link
+                    href="/catalog"
+                    className="px-7 py-3.5 rounded-2xl bg-white/10 border border-white/25 text-white font-bold text-base flex items-center gap-2 hover:bg-white/20 transition-all duration-300"
+                  >
+                    Browse All 11 Models
+                  </Link>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
 
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[100px]" />
-          <div className="absolute bottom-1/4 left-1/3 w-64 h-64 bg-orange-600/8 rounded-full blur-[80px]" />
+        {/* Left arrow */}
+        <button
+          onClick={goPrev}
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-black/40 border border-white/15 flex items-center justify-center text-white hover:bg-black/70 hover:border-white/40 transition-all duration-200 hover:scale-110"
+          aria-label="Previous slide"
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
+
+        {/* Right arrow */}
+        <button
+          onClick={goNext}
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-black/40 border border-white/15 flex items-center justify-center text-white hover:bg-black/70 hover:border-white/40 transition-all duration-200 hover:scale-110"
+          aria-label="Next slide"
+        >
+          <ChevronRight className="w-5 h-5" />
+        </button>
+
+        {/* Dot indicators */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2">
+          {slides.map((s, i) => (
+            <button
+              key={i}
+              onClick={() => goTo(i)}
+              className="transition-all duration-300 rounded-full"
+              style={{
+                width: i === current ? "28px" : "8px",
+                height: "8px",
+                backgroundColor: i === current ? s.accent : "rgba(255,255,255,0.35)",
+              }}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full py-20">
+        {/* Progress bar */}
+        <div className="absolute bottom-0 left-0 right-0 z-30 h-[3px] bg-white/10">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-3xl"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/15 border border-primary/40 text-primary text-xs font-bold uppercase tracking-widest mb-8">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              Siva Motors · Authorised EV Dealer · Vinukonda, AP
-            </div>
-
-            <h1 className="text-6xl sm:text-7xl lg:text-8xl font-display font-black leading-[0.95] mb-8 tracking-tight">
-              GO<br />
-              <span className="text-primary">ELECTRIC.</span><br />
-              <span className="text-4xl sm:text-5xl lg:text-6xl text-foreground/80 font-bold">
-                Save Thousands.
-              </span>
-            </h1>
-
-            <p className="text-xl text-muted-foreground mb-10 max-w-xl leading-relaxed">
-              11 electric scooters. No petrol. No DL required. No registration.<br />
-              <span className="text-foreground font-semibold">Test ride free in Vinukonda.</span>
-            </p>
-
-            <div className="flex flex-wrap gap-4 mb-12">
-              <a
-                href={WA_TESTRIDE_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-8 py-4 rounded-2xl bg-primary text-white font-bold text-lg flex items-center gap-3 hover:brightness-110 hover:scale-105 transition-all duration-300 shadow-[0_8px_32px_rgba(249,115,22,0.4)]"
-              >
-                <MessageCircle className="w-5 h-5" />
-                Book Free Test Ride
-              </a>
-              <Link
-                href="/catalog"
-                className="px-8 py-4 rounded-2xl bg-white/8 border border-white/20 text-white font-bold text-lg flex items-center gap-2 hover:bg-white/15 transition-all duration-300"
-              >
-                View All 11 Models
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-            </div>
-
-            <div className="flex flex-wrap gap-6 text-sm text-muted-foreground">
-              <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-primary shrink-0" /> Kalava Katta Road, Vinukonda</span>
-              <span className="flex items-center gap-2"><Phone className="w-4 h-4 text-primary shrink-0" /> +91 63003 12415</span>
-              <span className="flex items-center gap-2"><Clock className="w-4 h-4 text-primary shrink-0" /> Open Daily 9am – 7pm</span>
-            </div>
-          </motion.div>
+            className="h-full"
+            style={{ width: `${progress}%`, backgroundColor: slide.accent }}
+            transition={{ ease: "linear" }}
+          />
         </div>
       </section>
 
