@@ -13,12 +13,12 @@ import {
 const SLIDE_DURATION = 4500;
 
 const slides = [
-  { name: "Eko Tejas Jatayu", tagline: "Bold Flagship · Up to 90 km", price: "₹82,000", img: "images/models/jatayu-orange-front.jpg", slug: "eko-tejas-jatayu", accent: "#f97316" },
+  { name: "Eko Tejas Jatayu", tagline: "Bold Flagship · Up to 90 km", price: "₹82,000", img: "images/models/jatayu-showroom-front.png", slug: "eko-tejas-jatayu", accent: "#f97316" },
   { name: "Eko Tejas Astra", tagline: "Adventure Styled · 3024W Motor", price: "₹95,000", img: "images/models/astra-front.png", slug: "eko-tejas-astra", accent: "#eab308" },
   { name: "Eko Tejas Max", tagline: "Sporty V-LED · 8 Colour Options", price: "₹72,000", img: "images/models/max-front.png", slug: "eko-tejas-max", accent: "#22c55e" },
   { name: "Venumotors Thunder", tagline: "Keyless Entry · Cruise Mode", price: "₹72,000", img: "images/models/thunder-new.jpg", slug: "venumotors-thunder", accent: "#3b82f6" },
   { name: "Venumotors Icon", tagline: "80–90 km Range · Bold Graphics", price: "₹78,000", img: "images/models/icon-new.jpg", slug: "venumotors-icon", accent: "#ef4444" },
-  { name: "Eko Tejas Shero Neo", tagline: "Women-First Design · 4 Colours", price: "₹68,000", img: "images/models/shero-neo-pink-front.jpg", slug: "eko-tejas-shero-neo", accent: "#ec4899" },
+  { name: "Eko Tejas Shero Neo", tagline: "Women-First Design · 4 Colours", price: "₹68,000", img: "images/models/shero-neo-front.png", slug: "eko-tejas-shero-neo", accent: "#ec4899" },
   { name: "Eko Tejas Axel", tagline: "Everyday Commuter · No DL Required", price: "₹55,000", img: "images/models/axel-front.png", slug: "eko-tejas-axel", accent: "#a855f7" },
   { name: "Venumotors Spot", tagline: "Bold Angular Styling · 60 km Range", price: "₹52,000", img: "images/models/spot-new.jpg", slug: "venumotors-spot", accent: "#06b6d4" },
 ];
