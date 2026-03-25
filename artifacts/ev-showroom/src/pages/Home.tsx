@@ -21,6 +21,9 @@ const slides = [
   { name: "Eko Tejas Shero Neo", tagline: "Women-First Design · 4 Colours", price: "₹68,000", img: "images/models/shero-neo-front.png", slug: "eko-tejas-shero-neo", accent: "#ec4899" },
   { name: "Eko Tejas Axel", tagline: "Everyday Commuter · No DL Required", price: "₹55,000", img: "images/models/axel-front.png", slug: "eko-tejas-axel", accent: "#a855f7" },
   { name: "Venumotors Spot", tagline: "Bold Angular Styling · 60 km Range", price: "₹52,000", img: "images/models/spot-new.jpg", slug: "venumotors-spot", accent: "#06b6d4" },
+  { name: "Eko Tejas Axel Pro", tagline: "Premium Axel · Dual-Tone Styling", price: "₹75,000", img: "images/models/axel-pro-front.png", slug: "eko-tejas-axel-pro", accent: "#8b5cf6" },
+  { name: "Eko Tejas Priv Mini", tagline: "Retro Premium · 75 km/h · 140 km Range", price: "₹63,000", img: "images/models/priv-mini-front.png", slug: "eko-tejas-priv-mini", accent: "#14b8a6" },
+  { name: "Venumotors E-Fly", tagline: "Flagship Long-Range · 80–90 km", price: "₹82,000", img: "images/models/efly-new.jpg", slug: "venumotors-e-fly", accent: "#f43f5e" },
 ];
 
 const testimonials = [
