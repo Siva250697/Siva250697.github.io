@@ -100,7 +100,6 @@ export function Home() {
   const { data: categories } = useListCategories();
 
   const [current, setCurrent] = useState(0);
-  const [paused, setPaused] = useState(false);
   const [progress, setProgress] = useState(0);
 
   const goNext = useCallback(() => {
@@ -119,7 +118,6 @@ export function Home() {
   }, []);
 
   useEffect(() => {
-    if (paused) return;
     const interval = 50;
     let elapsed = 0;
     const timer = setInterval(() => {
@@ -140,11 +138,7 @@ export function Home() {
     <Layout>
 
       {/* ─── HERO SLIDESHOW ─── */}
-      <section
-        className="relative h-screen min-h-[600px] overflow-hidden"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-      >
+      <section className="relative h-screen min-h-[600px] overflow-hidden">
         {/* Background slides */}
         <AnimatePresence mode="sync">
           {slides.map((s, i) => i === current && (
