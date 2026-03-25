@@ -130,7 +130,7 @@ export function Home() {
       }
     }, interval);
     return () => clearInterval(timer);
-  }, [current, paused]);
+  }, [current]);
 
   const slide = slides[current];
 
